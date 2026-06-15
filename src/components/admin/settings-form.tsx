@@ -18,7 +18,7 @@ const settingFields = [
   { key: 'facebook_url', label: 'Facebook URL', placeholder: 'https://facebook.com/...', group: 'Social' },
 ]
 
-const groups = [...new Set(settingFields.map((f) => f.group))]
+const groups = Array.from(new Set(settingFields.map((f) => f.group)))
 
 export function AdminSettingsForm({ initialSettings }: Props) {
   const [values, setValues] = useState<Record<string, string>>(initialSettings)
