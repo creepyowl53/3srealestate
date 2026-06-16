@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Instagram, Youtube, Facebook, ArrowRight } from 'lucide-react'
+import { siteConfig } from '@/lib/site-config'
 
 export function Footer() {
   return (
@@ -98,22 +99,17 @@ export function Footer() {
                 <span className="text-white/60 text-sm">SCO 123, Sector 17-C,<br />Chandigarh - 160017</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-gold-400 shrink-0" />
-                <a href="tel:+919876543210" className="text-white/60 hover:text-gold-400 text-sm transition-colors">
-                  +91 98765 43210
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-gold-400 shrink-0" />
-                <a href="tel:+919876543211" className="text-white/60 hover:text-gold-400 text-sm transition-colors">
-                  +91 98765 43211
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-gold-400 shrink-0" />
-                <a href="mailto:info@3srealestate.com" className="text-white/60 hover:text-gold-400 text-sm transition-colors">
-                  info@3srealestate.com
-                </a>
+                <a href={`tel:${siteConfig.phonePrimary.replace(/\s/g, '')}`} className="text-white/60 hover:text-gold-400 text-sm transition-colors">
+  {siteConfig.phonePrimary}
+</a>
+...
+<a href={`tel:${siteConfig.phoneSecondary.replace(/\s/g, '')}`} className="text-white/60 hover:text-gold-400 text-sm transition-colors">
+  {siteConfig.phoneSecondary}
+</a>
+...
+<a href={`mailto:${siteConfig.email}`} className="text-white/60 hover:text-gold-400 text-sm transition-colors">
+  {siteConfig.email}
+</a>
               </li>
             </ul>
             <div className="mt-6">

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Phone, ChevronDown, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getPhoneLink, siteConfig } from '@/lib/site-config'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -132,12 +133,12 @@ export function Navbar() {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+919876543210"
-              className="flex items-center gap-2 text-white/80 hover:text-gold-400 transition-colors text-sm"
-            >
-              <Phone className="w-4 h-4" />
-              <span>+91 98765 43210</span>
-            </a>
+              href={getPhoneLink()}
+  className="flex items-center gap-2 text-white/80 hover:text-gold-400 transition-colors text-sm"
+>
+  <Phone className="w-4 h-4" />
+  <span>{siteConfig.phonePrimary}</span>
+</a>
             <Link
               href="/contact"
               className="btn-luxury text-sm px-5 py-2.5"

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Bed, Bath, Car, Square, Heart, Share2, Eye } from 'lucide-react'
 import { formatPrice } from '@/lib/lead-scoring'
 import { cn } from '@/lib/utils'
+import { getWhatsAppLink } from '@/lib/site-config'
 
 interface PropertyCardProps {
   property: {
@@ -178,7 +179,7 @@ export function PropertyCard({ property, index = 0, className }: PropertyCardPro
             View Details
           </Link>
           <a
-            href={`https://wa.me/919876543210?text=${encodeURIComponent(`Hi, I'm interested in ${property.title}`)}`}
+            href={getWhatsAppLink(`Hi, I'm interested in ${property.title}`)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-green-500 text-white text-xs font-semibold rounded-lg hover:bg-green-600 transition-colors"
