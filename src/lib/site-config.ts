@@ -1,9 +1,9 @@
 // src/lib/site-config.ts
 
 export const siteConfig = {
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210',
-  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91 98765 43210',
-  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91 98765 43211',
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918847554785',
+  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91 8847554785',
+  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91 8847554785',
   email: process.env.NEXT_PUBLIC_EMAIL || 'info@3srealestate.com',
 }
 
