@@ -34,68 +34,79 @@ export function FloatingActions() {
   ]
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-col gap-3 items-end"
-          >
-            {actions.map((action, i) => (
-              <motion.div
-                key={action.label}
-                initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 20, scale: 0.8 }}
-                transition={{ delay: i * 0.05 }}
-                className="flex items-center gap-3"
-              >
-                <span className="bg-charcoal-900 text-white text-xs px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                  {action.label}
-                </span>
-                {action.external ? (
-                  
-                    href={action.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-luxury transition-all ${action.color}`}
-                  >
-                    <action.icon className="w-5 h-5" />
-                  </a>
-                ) : (
-                  <Link
-                    href={action.href}
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-luxury transition-all ${action.color}`}
-                  >
-                    <action.icon className="w-5 h-5" />
-                  </Link>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.button
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-gold-gradient shadow-gold-lg flex items-center justify-center text-white transition-all hover:shadow-gold"
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+  <AnimatePresence>
+    {isOpen && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="flex flex-col gap-3 items-end"
       >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div key="close" initial={{ rotate: -90 }} animate={{ rotate: 0 }}>
-              <X className="w-6 h-6" />
-            </motion.div>
-          ) : (
-            <motion.div key="open" initial={{ rotate: 90 }} animate={{ rotate: 0 }}>
-              <MessageCircle className="w-6 h-6" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
-    </div>
+        {actions.map((action, i) => (
+          <motion.div
+            key={action.label}
+            initial={{ opacity: 0, x: 20, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 20, scale: 0.8 }}
+            transition={{ delay: i * 0.05 }}
+            className="flex items-center gap-3"
+          >
+            <span className="bg-charcoal-900 text-white text-xs px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+              {action.label}
+            </span>
+
+            {action.external ? (
+              <a
+                href={action.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-luxury transition-all hover:scale-110 ${action.color}`}
+              >
+                <action.icon className="w-5 h-5" />
+              </a>
+            ) : (
+              <Link
+                href={action.href}
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-luxury transition-all hover:scale-110 ${action.color}`}
+              >
+                <action.icon className="w-5 h-5" />
+              </Link>
+            )}
+          </motion.div>
+        ))}
+      </motion.div>
+    )}
+  </AnimatePresence>
+
+  <motion.button
+    whileTap={{ scale: 0.9 }}
+    onClick={() => setIsOpen(!isOpen)}
+    className="w-14 h-14 rounded-full bg-gold-gradient shadow-gold-lg flex items-center justify-center text-white transition-all hover:shadow-gold"
+  >
+    <AnimatePresence mode="wait">
+      {isOpen ? (
+        <motion.div
+          key="close"
+          initial={{ rotate: -90 }}
+          animate={{ rotate: 0 }}
+          exit={{ rotate: 90 }}
+        >
+          <X className="w-6 h-6" />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="open"
+          initial={{ rotate: 90 }}
+          animate={{ rotate: 0 }}
+          exit={{ rotate: -90 }}
+        >
+          <MessageCircle className="w-6 h-6" />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </motion.button>
+</div>
   )
 }
 
