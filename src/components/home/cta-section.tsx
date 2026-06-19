@@ -32,7 +32,7 @@ export function CTASection() {
               
                 href={getPhoneLink()}
                 className="flex items-center gap-2 bg-white text-gold-700 font-semibold px-7 py-3.5 rounded-lg hover:bg-white/90 transition-colors shadow-lg"
-              >
+              <a>
                 <Phone className="w-5 h-5" />
                 Call Now
               </a>
@@ -41,7 +41,7 @@ export function CTASection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-green-500 text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-green-600 transition-colors shadow-lg"
-              >
+              <a>
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </a>
