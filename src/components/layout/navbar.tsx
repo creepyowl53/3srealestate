@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Phone, ChevronDown, Search } from 'lucide-react'
+import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getPhoneLink, siteConfig } from '@/lib/site-config'
+import type { LiveConfig } from '@/lib/site-config'
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -37,12 +37,19 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ]
 
-export function Navbar() {
+interface NavbarProps {
+  config?: LiveConfig
+}
+
+export function Navbar({ config }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const pathname = usePathname()
   const isHome = pathname === '/'
+
+  const phone = config?.phonePrimary || '+91 98765 43210'
+  const phoneLink = `tel:${phone.replace(/\s/g, '')}`
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -57,26 +64,20 @@ export function Navbar() {
     : 'bg-charcoal-950/95 backdrop-blur-xl border-b border-white/10'
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        navBg
-      )}
-    >
+    <header className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-500', navBg)}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
+
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="w-10 h-10 bg-gold-gradient rounded-sm flex items-center justify-center shadow-gold">
-                <span className="text-white font-heading font-bold text-lg">3S</span>
-              </div>
+            <div className="w-10 h-10 bg-gold-gradient rounded-sm flex items-center justify-center shadow-gold">
+              <span className="text-white font-heading font-bold text-lg">3S</span>
             </div>
             <div className="flex flex-col">
               <span className="text-white font-heading font-bold text-xl leading-none">
                 3S Real Estate
               </span>
-              <span className="text-gold-400 text-xs tracking-widest font-body">
+              <span className="text-gold-400 text-xs tracking-widest">
                 SMART • SECURE • SOPHISTICATED
               </span>
             </div>
@@ -95,16 +96,13 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     'flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-sm transition-colors',
-                    pathname === link.href
-                      ? 'text-gold-400'
-                      : 'text-white/80 hover:text-white'
+                    pathname === link.href ? 'text-gold-400' : 'text-white/80 hover:text-white'
                   )}
                 >
                   {link.label}
                   {link.children && <ChevronDown className="w-3.5 h-3.5 opacity-70" />}
                 </Link>
 
-                {/* Dropdown */}
                 <AnimatePresence>
                   {link.children && activeDropdown === link.label && (
                     <motion.div
@@ -130,18 +128,18 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href={getPhoneLink()}
-  className="flex items-center gap-2 text-white/80 hover:text-gold-400 transition-colors text-sm"
->
-  <Phone className="w-4 h-4" />
-  <span>{siteConfig.phonePrimary}</span>
-</a>
+              href={phoneLink}
+              className="flex items-center gap-2 text-white/80 hover:text-gold-400 transition-colors text-sm"
+            >
+              <Phone className="w-4 h-4" />
+              <span>{phone}</span>
+            </a>
             <Link
               href="/contact"
-              className="btn-luxury text-sm px-5 py-2.5"
+              className="bg-gold-gradient text-white font-semibold px-5 py-2.5 rounded-sm text-sm hover:shadow-gold transition-all"
             >
               Get Free Consultation
             </Link>
@@ -154,6 +152,7 @@ export function Navbar() {
           >
             {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+
         </div>
       </div>
 
@@ -198,14 +197,14 @@ export function Navbar() {
                 </div>
               ))}
               <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-3">
-                <a href="tel:+919876543210" className="flex items-center gap-2 text-white/80 px-4">
+                <a href={phoneLink} className="flex items-center gap-2 text-white/80 px-4">
                   <Phone className="w-4 h-4 text-gold-400" />
-                  <span className="text-sm">+91 98765 43210</span>
+                  <span className="text-sm">{phone}</span>
                 </a>
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileOpen(false)}
-                  className="btn-luxury text-center text-sm py-3"
+                  className="bg-gold-gradient text-white font-semibold text-center text-sm py-3 rounded-lg"
                 >
                   Get Free Consultation
                 </Link>

@@ -3,8 +3,13 @@
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Instagram, Youtube, Facebook, ArrowRight } from 'lucide-react'
 import { siteConfig } from '@/lib/site-config'
+import type { LiveConfig } from '@/lib/site-config'
 
-export function Footer() {
+interface FooterProps {
+  config?: LiveConfig
+}
+
+export function Footer({ config }: FooterProps) {
   return (
     <footer className="bg-charcoal-950 text-white">
       {/* Main footer */}

@@ -1,23 +1,51 @@
 // src/lib/site-config.ts
+import { prisma } from './prisma'
 
 export const siteConfig = {
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918847554785',
-  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91 8847554785',
-  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91 8847554785',
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210',
+  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91 98765 43210',
+  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91 98765 43211',
   email: process.env.NEXT_PUBLIC_EMAIL || 'info@3srealestate.com',
 }
 
-// Returns digits-only number for wa.me links, e.g. "919876543210"
 export function getWhatsAppDigits(): string {
   return siteConfig.whatsappNumber.replace(/[^0-9]/g, '')
 }
 
-// Builds a full WhatsApp link with a prefilled message
 export function getWhatsAppLink(message: string): string {
   return `https://wa.me/${getWhatsAppDigits()}?text=${encodeURIComponent(message)}`
 }
 
-// Returns tel: link for the primary phone number (digits only, with +)
 export function getPhoneLink(): string {
   return `tel:${siteConfig.phonePrimary.replace(/\s/g, '')}`
 }
+
+export async function getLiveConfig() {
+  try {
+    const settings = await prisma.siteSettings.findMany()
+    const map = Object.fromEntries(settings.map((s) => [s.key, s.value]))
+    return {
+      whatsappNumber: map['whatsapp_number'] || siteConfig.whatsappNumber,
+      phonePrimary: map['phone_primary'] || siteConfig.phonePrimary,
+      phoneSecondary: map['phone_secondary'] || siteConfig.phoneSecondary,
+      email: map['email_primary'] || siteConfig.email,
+      address: map['address'] || 'SCO 123, Sector 17-C, Chandigarh',
+      instagramUrl: map['instagram_url'] || '',
+      youtubeUrl: map['youtube_url'] || '',
+      facebookUrl: map['facebook_url'] || '',
+    }
+  } catch {
+    return {
+      whatsappNumber: siteConfig.whatsappNumber,
+      phonePrimary: siteConfig.phonePrimary,
+      phoneSecondary: siteConfig.phoneSecondary,
+      email: siteConfig.email,
+      address: 'SCO 123, Sector 17-C, Chandigarh',
+      instagramUrl: '',
+      youtubeUrl: '',
+      facebookUrl: '',
+    }
+  }
+}
+
+export type LiveConfig = Awaited<ReturnType<typeof getLiveConfig>>
