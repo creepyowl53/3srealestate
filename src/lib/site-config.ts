@@ -2,9 +2,9 @@
 import { prisma } from './prisma'
 
 export const siteConfig = {
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210',
-  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91 98765 43210',
-  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91 98765 43211',
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872110222',
+  phonePrimary: process.env.NEXT_PUBLIC_PHONE_PRIMARY || '+91-8872520002',
+  phoneSecondary: process.env.NEXT_PUBLIC_PHONE_SECONDARY || '+91-8872110222',
   email: process.env.NEXT_PUBLIC_EMAIL || 'info@3srealestate.com',
 }
 
@@ -29,7 +29,7 @@ export async function getLiveConfig() {
       phonePrimary: map['phone_primary'] || siteConfig.phonePrimary,
       phoneSecondary: map['phone_secondary'] || siteConfig.phoneSecondary,
       email: map['email_primary'] || siteConfig.email,
-      address: map['address'] || 'SCO 123, Sector 17-C, Chandigarh',
+      address: map['address'] || 'SCO 90-91, sector-86, Preet City, near-HDFC bank, First Floor',
       instagramUrl: map['instagram_url'] || '',
       youtubeUrl: map['youtube_url'] || '',
       facebookUrl: map['facebook_url'] || '',
@@ -40,7 +40,7 @@ export async function getLiveConfig() {
       phonePrimary: siteConfig.phonePrimary,
       phoneSecondary: siteConfig.phoneSecondary,
       email: siteConfig.email,
-      address: 'SCO 123, Sector 17-C, Chandigarh',
+      address: 'SCO 90-91, sector-86, Preet City, near-HDFC bank, First Floor',
       instagramUrl: '',
       youtubeUrl: '',
       facebookUrl: '',

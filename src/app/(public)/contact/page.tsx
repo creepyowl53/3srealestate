@@ -42,9 +42,9 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="space-y-4">
             {[
-              { icon: Phone, title: 'Call Us', lines: ['+91 98765 43210', '+91 98765 43211'], href: 'tel:+919876543210' },
+              { icon: Phone, title: 'Call Us', lines: ['+91 8872520002', '+91 8872110222'], href: 'tel:+918872520002' },
               { icon: Mail, title: 'Email Us', lines: ['info@3srealestate.com', 'sales@3srealestate.com'], href: 'mailto:info@3srealestate.com' },
-              { icon: MapPin, title: 'Visit Us', lines: ['SCO 123, Sector 17-C', 'Chandigarh – 160017'], href: '#' },
+              { icon: MapPin, title: 'Visit Us', lines: ['SCO 90-91, sector-86, Preet City, near-HDFC bank, First Floor'], href: '#' },
               { icon: Clock, title: 'Office Hours', lines: ['Mon–Sat: 10 AM – 7 PM', 'Sun: By Appointment'], href: '#' },
             ].map(({ icon: Icon, title, lines, href }) => (
               <a key={title} href={href} className="flex gap-4 p-5 bg-white rounded-xl border border-gray-100 hover:border-gold-200 hover:shadow-md transition-all group">
@@ -60,7 +60,7 @@ export default function ContactPage() {
 
             {/* WhatsApp button */}
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to inquire about properties."
+              href="https://wa.me/+918872520002?text=Hi! I want to inquire about properties."
               target="_blank" rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 bg-green-500 text-white font-semibold py-4 rounded-xl hover:bg-green-600 transition-colors shadow-lg"
             >
