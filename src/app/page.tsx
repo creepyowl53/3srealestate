@@ -12,21 +12,25 @@ import { LeadCapturePopup } from '@/components/lead/lead-capture-popup'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { FloatingActions } from '@/components/shared/floating-actions'
+import { getLiveConfig } from '@/lib/site-config'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '3S Real Estate | Premium Properties in Mohali, Chandigarh & Zirakpur',
-  description: 'Find luxury villas, flats, commercial spaces & investment plots in Mohali, Chandigarh, Zirakpur & New Chandigarh. Smart • Secure • Sophisticated real estate solutions.',
+  description:
+    'Find luxury villas, flats, commercial spaces & investment plots in Mohali, Chandigarh, Zirakpur & New Chandigarh. Smart • Secure • Sophisticated real estate solutions.',
   openGraph: {
     title: '3S Real Estate | Smart • Secure • Sophisticated',
     description: 'Premium properties in Tricity region. Luxury villas, flats, commercial spaces & investment plots.',
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const config = await getLiveConfig()
+
   return (
     <>
-      <Navbar />
+      <Navbar config={config} />
       <main>
         <HeroSection />
         <StatsSection />
@@ -44,8 +48,8 @@ export default function HomePage() {
         <FAQSection />
         <CTASection />
       </main>
-      <Footer />
-      <FloatingActions />
+      <Footer config={config} />
+      <FloatingActions config={config} />
       <LeadCapturePopup />
     </>
   )

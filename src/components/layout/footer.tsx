@@ -101,7 +101,7 @@ export function Footer({ config }: FooterProps) {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-gold-400 mt-0.5 shrink-0" />
-                <span className="text-white/60 text-sm">SCO 123, Sector 17-C,<br />Chandigarh - 160017</span>
+                <span className="text-white/60 text-sm">SCO 90-91, sector-86, Preet City, near-HDFC bank, First Floor<br />Mohali Punjab - 140306</span>
               </li>
               <li className="flex items-center gap-3">
                 <a href={`tel:${siteConfig.phonePrimary.replace(/\s/g, '')}`} className="text-white/60 hover:text-gold-400 text-sm transition-colors">
